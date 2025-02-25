@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@db:1521:xe
+      - SPRING_DATASOURCE_USERNAME=SYS
+      - SPRING_DATASOURCE_PASSWORD=Mouad@2001
+
+  db:
+    image: gvenzl/oracle-xe:21-slim
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=Mouad@2001
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+volumes:
+  oracle-data:
